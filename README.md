@@ -1,3 +1,3 @@
 ## Ссылка на макет
-- zip (https://disk.yandex.ru/d/WwP8pXIfz_mATA) 
-- rar (https://disk.yandex.ru/d/K_9A8tDjMuUVkQ)
+- zip (https://disk.yandex.ru/d/Aw9bBpVRxyii1A) 
+- rar (https://disk.yandex.ru/d/vVWHZQcgzlg2aQ)
