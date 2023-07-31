@@ -77,6 +77,11 @@
   transition: all 0.3s ease-in-out;
 }
 
+.profile__button_disabled {
+  color: #8b8b8b;
+  cursor: default;
+}
+
 .profile__button_type_edit {
   font-weight: 400;
   color: inherit;

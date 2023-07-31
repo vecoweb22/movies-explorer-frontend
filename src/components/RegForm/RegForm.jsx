@@ -9,13 +9,16 @@ function RegForm(props) {
         <header>
           <Logo />
         </header>
-        <h2 className="regform__title">{props.title}</h2>
-        <form className="form">
+        <h1 className="regform__title">{props.title}</h1>
+        <form className="form" onSubmit={props.onSubmit}>
           {props.children}
           <button
-            className="form__submit-btn"
+            className={`form__submit-btn ${
+              !props.isValid && "form__submit-btn_disabled"
+            }`}
             type="submit"
             aria-label={props.textBtn}
+            disabled={!props.isValid}
           >
             {props.textBtn}
           </button>

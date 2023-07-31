@@ -1,95 +1,96 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Header/Header";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import useValid from "../../hooks/useValid";
 import "./Profile.css";
 
-const Profile = ({ onLogout }) => {
-  const [user, setUser] = useState({
-    name: "Виталий",
-    email: "user@yandex.ru",
+const Profile = (props) => {
+  const currentUser = useContext(CurrentUserContext);
+  const { name, email } = currentUser;
+  const { setIsValid, values, errors, handleChange, isValid } = useValid({
+    name: name,
+    email: email,
   });
+  const [isSame, setIsSame] = useState(true);
 
-  const [isEdit, setIsEdit] = useState(false);
+  useEffect(() => {
+    setIsValid(true);
+  }, [currentUser]);
 
-  const handleMakeEdit = () => {
-    setIsEdit(true);
-  };
-
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-    setUser({ ...user, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
+  function handleSubmitProfile(e) {
     e.preventDefault();
-    console.log("Профиль обновлен");
-    setIsEdit(false);
-  };
+    props.onEditProfile(values);
+  }
 
-  const handleLogout = () => {
-    onLogout();
-  };
+  useEffect(() => {
+    if (name !== values.name || email !== values.email) {
+      setIsSame(false);
+    } else {
+      setIsSame(true);
+    }
+  }, [values, currentUser]);
 
   return (
     <>
       <Header loggedIn={true} />
       <main className="profile container">
-        <h1 className="profile__title">{`Привет, ${user.name}!`}</h1>
-
+        <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
         <form
           name="profile__form"
           className="profile__form"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmitProfile}
         >
-          <label className="profile__input-container">
-            <span className="profile__input-label">Имя</span>
+          <div className="profile__input-container">
+            <label className="profile__input-label">Имя</label>
             <input
-              disabled={!isEdit}
-              required
+              id="name"
+              required=""
               type="text"
               name="name"
               className="profile__input"
               placeholder="Укажите имя"
-              value={user.name || ""}
+              value={values.name}
               onChange={handleChange}
+              errors={errors.message}
               minLength={2}
               maxLength={30}
             />
-          </label>
-          <label className="profile__input-container">
-            <span className="profile__input-label">E-mail</span>
+          </div>
+          <span className="error">{errors.name || ""}</span>
+          <div className="profile__input-container">
+            <label className="profile__input-label">E-mail</label>
             <input
-              disabled={!isEdit}
-              required
+              id="email"
+              required=""
               type="email"
               name="email"
               className="profile__input"
               placeholder="Укажите почту"
-              value={user.email || ""}
+              value={values.email}
               onChange={handleChange}
             />
-          </label>
-          {isEdit ? (
-            <button type="submit" className="profile__submit">
-              Сохранить
+          </div>
+          <span className="error">{errors.email || ""}</span>
+          <div className="profile__buttons">
+            <button
+              className={`profile__button profile__button_type_edit ${
+                isSame || !isValid ? "profile__button_disabled" : ""
+              }`}
+              disabled={isSame || !isValid}
+              type="submit"
+              aria-label="Редактировать профиль"
+            >
+              Редактировать
             </button>
-          ) : (
-            <div className="profile__buttons">
-              <button
-                type="button"
-                className="profile__button profile__button_type_edit"
-                onClick={handleMakeEdit}
-              >
-                Редактировать
-              </button>
-              <button
-                type="button"
-                className="profile__button profile__button_type_logout"
-                onClick={handleLogout}
-              >
-                Выйти из аккаунта
-              </button>
-            </div>
-          )}
+            <button
+              type="button"
+              className="profile__button profile__button_type_logout"
+              aria-label="Выйти из аккаунта"
+              onClick={props.onLogout}
+            >
+              Выйти из аккаунта
+            </button>
+          </div>
         </form>
       </main>
     </>

@@ -8,7 +8,7 @@ function AboutMe(props) {
       <div className="section__line"></div>
       <div className="aboutme__profile">
         <div className="aboutme__info">
-          <h2 className="aboutme__title">Виталий</h2>
+          <h3 className="aboutme__title">Виталий</h3>
           <p className="aboutme__subtitle aboutme__subtitle_weight_bold">
             Фронтенд-разработчик, 30 лет
           </p>
@@ -18,16 +18,16 @@ function AboutMe(props) {
           <a
             href="https://github.com/vecoweb22"
             className="link aboutme__git"
-            target="_blank"
             rel="noreferrer"
+            target="_blank"
           >
             Github
           </a>
         </div>
         <img
           src={abouteMeImage}
-          alt="Фотография профиля"
           className="aboutme__image"
+          alt="Фотография профиля"
         />
       </div>
     </section>

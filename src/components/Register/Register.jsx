@@ -3,14 +3,16 @@ import RegForm from "../RegForm/RegForm";
 import Input from "../Input/Input";
 
 function Register(props) {
-  const { errors, values, handleChange } = useValid({
+  const { errors, values, handleChange, isValid, setIsValid } = useValid({
     name: "",
     email: "",
     password: "",
   });
 
-  function handleSubmit(e) {
+  function handleSubmitRegister(e) {
     e.preventDefault();
+    setIsValid(false);
+    props.onRegister(values.email, values.password, values.name);
   }
   return (
     <main>
@@ -20,7 +22,8 @@ function Register(props) {
         link="/signin"
         textLink="Войти"
         subtitle="Уже зарегистрированы?"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmitRegister}
+        isValid={isValid}
       >
         <Input
           id="name"
@@ -29,7 +32,7 @@ function Register(props) {
           type="text"
           required=""
           minLength={2}
-          maxLength={40}
+          maxLength={30}
           value={values.name || ""}
           onChange={handleChange}
           errors={errors.name || ""}
@@ -52,7 +55,7 @@ function Register(props) {
           name="password"
           type="password"
           required=""
-          minLength={8}
+          minLength={6}
           value={values.password || ""}
           onChange={handleChange}
           errors={errors.password || ""}

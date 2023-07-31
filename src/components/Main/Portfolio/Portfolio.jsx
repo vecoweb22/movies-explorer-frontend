@@ -12,7 +12,7 @@ function Portfolio(props) {
             target="_blank"
             rel="noreferrer"
           >
-            <h2 className="portfolio__subtitle">Статичный сайт</h2>
+            <p className="portfolio__text">Статичный сайт</p>
             <p className="portfolio__icon">↗</p>
           </a>
           <div className="section__line section__line_color_grey"></div>
@@ -24,7 +24,7 @@ function Portfolio(props) {
             target="_blank"
             rel="noreferrer"
           >
-            <h2 className="portfolio__subtitle">Адаптивный сайт</h2>
+            <p className="portfolio__text">Адаптивный сайт</p>
             <p className="portfolio__icon">↗</p>
           </a>
           <div className="portfolio__line section__line_color_grey"></div>
@@ -36,7 +36,7 @@ function Portfolio(props) {
             target="_blank"
             rel="noreferrer"
           >
-            <h2 className="portfolio__subtitle">Одностраничное приложение</h2>
+            <p className="portfolio__text">Одностраничное приложение</p>
             <p className="portfolio__icon">↗</p>
           </a>
           <div className="section__line section__line_color_grey"></div>

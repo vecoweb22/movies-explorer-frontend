@@ -8,18 +8,16 @@ function AuthNav(props) {
     <>
       <BurgerMenu
         isOpen={props.isOpen}
-        handleMenuClick={props.handleMenuClick}
+        handleMenu={props.handleMenu}
       />
       <div className={`menu ${props.isOpen && "menu_opened"}`}>
         <nav>
           <ul className={`authnav list ${props.isOpen && "authnav_opened"}`}>
-            {props.isOpen && (
-              <li className="authnav__item">
-                <NavLink className="link authnav__link" to="/">
-                  Главная
-                </NavLink>
-              </li>
-            )}
+            <li className="authnav__item authnav__item_type_main">
+              <NavLink className="link authnav__link" to="/">
+                Главная
+              </NavLink>
+            </li>
             <li className="authnav__item">
               <NavLink className="link authnav__link" to="/movies">
                 Фильмы

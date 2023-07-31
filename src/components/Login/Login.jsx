@@ -3,13 +3,14 @@ import RegForm from "../RegForm/RegForm";
 import Input from "../Input/Input";
 
 function Login(props) {
-  const { values, errors, handleChange } = useValid({
+  const { values, errors, handleChange, isValid, setIsValid } = useValid({
     email: "",
     password: "",
   });
 
-  function handleSubmit(e) {
+  function handleSubmitLogin(e) {
     e.preventDefault();
+    setIsValid(false);
     props.onLogin(values.email, values.password);
   }
   return (
@@ -19,8 +20,9 @@ function Login(props) {
         textBtn={"Войти"}
         link="/signup"
         textLink="Регистрация"
-        subtitle="Еще не зарегистрированы?"
-        onSubmit={handleSubmit}
+        subtitle="Вы не зарегистрированы?"
+        onSubmit={handleSubmitLogin}
+        isValid={isValid}
       >
         <Input
           id="email"

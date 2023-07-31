@@ -10,7 +10,7 @@ function Footer(props) {
         <div className="footer__line"></div>
       </div>
       <div className="footer__copyright">
-        <p className="footer__date">&#169; 2023</p>
+        <p className="footer__date">&copy; {new Date().getFullYear()}</p>
         <ul className="footer__links list">
           <li className="footer__item">
             <a

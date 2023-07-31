@@ -1,0 +1,16 @@
+.messageserv {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 55.5px 20px;
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: calc(-1em / 25);
+}
+
+@media screen and (max-width: 480px) {
+  .messageserv {
+    padding: 57.5px 10px;
+    font-size: 20px;
+  }
+}

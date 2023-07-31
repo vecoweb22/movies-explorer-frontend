@@ -1,24 +1,22 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import "./Header.css";
 import Navigation from "./Navigation/Navigation";
 import AuthNav from "./AuthNav/AuthNav";
 import Logo from "../Logo/Logo";
+import "./Header.css";
 
 function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
 
-  function handleMenuClick() {
+  function handleMenu() {
     setIsOpen(!isOpen);
   }
   return (
     <header className="header">
       <Logo />
-      {location.pathname === "/" ? (
+      {!props.loggedIn ? (
         <Navigation />
       ) : (
-        <AuthNav handleMenuClick={handleMenuClick} isOpen={isOpen} />
+        <AuthNav handleMenu={handleMenu} isOpen={isOpen} />
       )}
     </header>
   );

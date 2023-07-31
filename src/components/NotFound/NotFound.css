@@ -23,7 +23,7 @@
   font-family: "Inter", Arial, sans-serif;
 }
 
-.notfound__subtitle {
+.notfound__text {
   margin: 0;
   padding: 10px 0 1px;
   text-align: center;
@@ -67,7 +67,7 @@
     font-size: 80px;
   }
 
-  .notfound__subtitle {
+  .notfound__text {
     margin-top: 4px;
     font-size: 12px;
   }
