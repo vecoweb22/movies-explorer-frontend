@@ -6,10 +6,10 @@
 
 ## Ссылки на проект
 
-IP  
+IP  130.193.50.226
 
-Бэкенд:  
+- Backend: (https://api.vecowebmovies.nomoreparties.sbs)
 
-Фронтенд:   
+- Frontend: (https://vecowebmovies.nomoreparties.sbs)
 
-## [Ссылка на пул реквест level-3]()  
+## [Ссылка на пул реквест level-3](https://github.com/vecoweb22/movies-explorer-frontend/pull/2)  
