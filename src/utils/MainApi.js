@@ -1,6 +1,6 @@
 import { BASE_URL, MOVIES_IMAGES_URL } from '../constants/constants';
 
-export class Api {
+export class MainApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -76,7 +76,7 @@ export class Api {
   }
 }
 
-const api = new Api({
+const api = new MainApi({
   baseUrl: BASE_URL,
   headers: {
     'Content-Type': 'application/json',

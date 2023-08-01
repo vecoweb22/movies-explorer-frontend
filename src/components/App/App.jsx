@@ -13,7 +13,7 @@ import { LENGTH_MOVIE_T, LENGTH_MOVIE_M } from "../../constants/constants";
 import ProtectedRouteItem from "../ProtectedRoute/ProptectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
-import api from "../../utils/Api";
+import api from "../../utils/MainApi";
 import ModalInfo from "../ModalInfo/ModalInfo";
 import moviesApi from "../../utils/MoviesApi";
 import { useResize } from "../../hooks/useResize";
