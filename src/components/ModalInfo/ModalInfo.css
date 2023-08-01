@@ -53,7 +53,7 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  background-image: url(../../images/close-icon.svg);
+  background-image: url(../../images/Close-Icon.svg);
   background-size: 32px;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .modal__image_type_success {
-  background-image: url(../../images/union.svg);
+  background-image: url(../../images/Union.svg);
 }
 
 .modal__image_type_error {
