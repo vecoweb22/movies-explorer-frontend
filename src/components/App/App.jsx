@@ -9,7 +9,14 @@ import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import NotFound from "../NotFound/NotFound";
 import "./App.css";
-import { LENGTH_MOVIE_T, LENGTH_MOVIE_M } from "../../constants/constants";
+import {
+  LENGTH_MOVIE_T,
+  LENGTH_MOVIE_M,
+  LENGTH_MOVIE_NT,
+  MORE_MOVIE_L,
+  MORE_MOVIE_S,
+  SHORT_DURATION,
+} from "../../constants/constants";
 import ProtectedRouteItem from "../ProtectedRoute/ProptectedRoute";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import * as auth from "../../utils/auth";
@@ -28,6 +35,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isResultError, setIsResultError] = useState(false);
   const [moviesLength, setMoviesLength] = useState(null);
+  const [addCount, setAddCount] = useState(0); // стейт добавляемого колва карточек
   const [isPageLoading, setIsPageLoading] = useState(false);
   const { pathname } = useLocation();
 
@@ -82,22 +90,24 @@ function App() {
   }
 
   function handleEditProfile(userData) {
-    api
+    return api
       .setUserProfile(userData)
       .then((res) => {
+        openPopup("Данные успешно изменены", true);
         setCurrentUser(res);
       })
-      .catch((err) => openPopup(err))
+      .catch((err) =>
+        openPopup("При обновлении профиля произошла ошибка.", true)
+      )
       .finally(() => {
-        openPopup("Данные успешно изменены", true);
-        setTimeout(() => closePopup(), 1000);
+        setTimeout(() => closePopup(), 1100);
       });
   }
 
   function openPopup(message, isSuccessfully) {
     setIsOpen(true);
     setInfoMessage({
-      isSuccessfully: isSuccessfully || false,
+      isSuccessfully: isSuccessfully,
       text: message.message || message || "Что-то пошло не так!",
     });
   }
@@ -112,7 +122,7 @@ function App() {
       (movie) => movie.nameRU.toLowerCase().includes(filmName.toLowerCase())
     );
     const movies = isShortFilms
-      ? filteredMovies.filter((movie) => movie.duration <= 40)
+      ? filteredMovies.filter((movie) => movie.duration <= SHORT_DURATION)
       : filteredMovies;
     setMovies(movies);
     localStorage.setItem("movieName", filmName);
@@ -220,9 +230,22 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    !windowSize.isScreenSm
-      ? setMoviesLength(LENGTH_MOVIE_M)
-      : setMoviesLength(LENGTH_MOVIE_T);
+    // добавляю параметры в зависимости от ширины экрана
+    if (windowSize.isScreenSm) {
+      // мобилка
+      setMoviesLength(LENGTH_MOVIE_M);
+      setAddCount(MORE_MOVIE_S);
+      return;
+    }
+    if (windowSize.isScreenMd) {
+      // планшет
+      setMoviesLength(LENGTH_MOVIE_T);
+      setAddCount(MORE_MOVIE_S);
+      return;
+    }
+    // и больше
+    setMoviesLength(LENGTH_MOVIE_NT);
+    setAddCount(MORE_MOVIE_L);
   }, [windowSize]);
 
   return (
@@ -246,6 +269,7 @@ function App() {
                   handleDelete={removeFromChoice}
                   isSaved={isSaved}
                   moviesLength={moviesLength}
+                  addCount={addCount}
                 />
               }
             />

@@ -22,6 +22,7 @@ function Movies(props) {
           isResError={props.isResError}
           moviesLength={props.moviesLength}
           handleMore={props.handleMore}
+          addCount={props.addCount}
         />
       </main>
       <Footer />

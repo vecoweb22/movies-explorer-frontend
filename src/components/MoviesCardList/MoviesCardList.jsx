@@ -9,24 +9,32 @@ function MoviesCardList(props) {
   const location = useLocation();
   const [moviesShow, setMoviesShow] = useState(props.movies);
   const ref = useRef(props.moviesLength);
-  let arrMovies = [];
 
   function loopSlice(start, finish) {
     const sliceMovies = props.movies.slice(start, finish);
-    arrMovies = arrMovies.concat(sliceMovies);
-    setMoviesShow(arrMovies);
+    setMoviesShow(sliceMovies);
   }
 
   function handleMore() {
-    loopSlice(0, ref.current + props.moviesLength);
-    ref.current += props.moviesLength;
+    // проверяю целый ли ряд карточке
+    if (moviesShow.length % props.addCount !== 0) {
+      // если нет добавляю до конца ряда
+      const number = props.addCount - (moviesShow.length % props.addCount);
+      loopSlice(0, ref.current + number);
+      ref.current += number;
+      return;
+    }
+
+    // добавляю ряд
+    loopSlice(0, ref.current + props.addCount);
+    ref.current += props.addCount;
   }
 
   useEffect(() => {
-    const sliceMovies = props.movies.slice(0, props.moviesLength);
-    setMoviesShow(sliceMovies);
+    // отрисовываю карточки при монтировании
     ref.current = props.moviesLength;
-  }, [props.movies, props.moviesLength]);
+    loopSlice(0, ref.current);
+  }, [props.movies]);
 
   function renderMessage() {
     if (location.pathname === "/movies") {
@@ -55,7 +63,7 @@ function MoviesCardList(props) {
         {moviesShow.map((movie) => {
           return (
             <MoviesCard
-              key={movie._id || movie.movieId}
+              key={movie._id || movie.id}
               movie={movie}
               handleDelete={props.handleDelete}
               handleLike={props.handleLike}
