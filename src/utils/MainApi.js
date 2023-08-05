@@ -6,7 +6,7 @@ export class MainApi {
     this._headers = headers;
   }
 
-  _checkResponce(res) {
+  _checkResponce = (res) => {
     if (res.ok) {
       return res.json();
     } else {
@@ -31,10 +31,7 @@ export class MainApi {
       method: 'PATCH',
       headers: this._headers,
       credentials: 'include',
-      body: JSON.stringify({
-        name: userData.name,
-        email: userData.email,
-      }),
+      body: JSON.stringify(userData),
     }).then((res) => this._checkResponce(res));
   }
 
