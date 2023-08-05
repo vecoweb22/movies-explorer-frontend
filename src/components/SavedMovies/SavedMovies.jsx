@@ -3,6 +3,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import { SHORT_DURATION } from "../../constants/constants";
 
 function SavedMovies(props) {
   const [movies, setMovies] = useState(props.movies);
@@ -14,7 +15,9 @@ function SavedMovies(props) {
       movie.nameRU.toLowerCase().includes(filmName.toLowerCase())
     );
     if (isShortFilms) {
-      setMovies(filterSaveMovies.filter((movie) => movie.duration <= 30));
+      setMovies(
+        filterSaveMovies.filter((movie) => movie.duration <= SHORT_DURATION)
+      );
     } else {
       setMovies(filterSaveMovies);
     }
