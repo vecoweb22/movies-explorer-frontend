@@ -12,10 +12,16 @@ const Profile = (props) => {
     email: email,
   });
   const [isSame, setIsSame] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
     setIsValid(true);
   }, [currentUser]);
+
+  function handleEdit(e) {
+    e.preventDefault();
+    setIsEdit(true);
+  }
 
   function handleSubmitProfile(e) {
     e.preventDefault();
@@ -29,6 +35,10 @@ const Profile = (props) => {
       setIsSame(true);
     }
   }, [values, currentUser]);
+
+  useEffect(() => {
+    setIsEdit(false);
+  }, [currentUser]);
 
   return (
     <>
@@ -54,6 +64,7 @@ const Profile = (props) => {
               errors={errors.message}
               minLength={2}
               maxLength={30}
+              disabled={!isEdit}
             />
           </div>
           <span className="error">{errors.name || ""}</span>
@@ -68,28 +79,35 @@ const Profile = (props) => {
               placeholder="Укажите почту"
               value={values.email}
               onChange={handleChange}
+              disabled={!isEdit}
             />
           </div>
           <span className="error">{errors.email || ""}</span>
           <div className="profile__buttons">
-            <button
-              className={`profile__button profile__button_type_edit ${
-                isSame || !isValid ? "profile__button_disabled" : ""
-              }`}
-              disabled={isSame || !isValid}
-              type="submit"
-              aria-label="Редактировать профиль"
-            >
-              Редактировать
-            </button>
-            <button
-              type="button"
-              className="profile__button profile__button_type_logout"
-              aria-label="Выйти из аккаунта"
-              onClick={props.onLogout}
-            >
-              Выйти из аккаунта
-            </button>
+            {isEdit ? (
+              <button className="profile__submit" disabled={isSame || !isValid} type="submit">
+                Сохранить
+              </button>
+            ) : (
+              <>
+                <button
+                  className={"profile__button profile__button_type_edit"}
+                  onClick={handleEdit}
+                  type="button"
+                  aria-label="Редактировать профиль"
+                >
+                  Редактировать
+                </button>
+                <button
+                  type="button"
+                  className="profile__button profile__button_type_logout"
+                  aria-label="Выйти из аккаунта"
+                  onClick={props.onLogout}
+                >
+                  Выйти из аккаунта
+                </button>
+              </>
+            )}
           </div>
         </form>
       </main>
