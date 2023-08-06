@@ -1,0 +1,55 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/fonts/fonts.css);
+
+html {
+  scroll-behavior: smooth;
+}
+
+.content {
+  position: relative;
+  min-height: 100vh;
+}
+
+.page {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 100%;
+  background-color: #fff;
+  color: #000;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  transition: all linear 0.4s;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+.link:focus {
+  font-weight: 500;
+}
+
+.error {
+  margin: 6px 0 0;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  font-family: "Inter", Arial, sans-serif;
+  color: #ff3055;
+}
+
+.content__preloader {
+  height: 100vh;
+  margin: auto;
+}
